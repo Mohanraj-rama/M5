@@ -13,22 +13,18 @@ Write a C program to convert a 23.65 into 25 using pointer
 #include <stdio.h>
 
 int main() {
-    float num = 23.65; // Original number
-    float *ptr = &num; // Pointer to the number
-    
-    printf("Original number: %.2f\n", *ptr);
-    
-    // Modify the value using pointer to set it to 25
-    *ptr = 25;
-    
-    printf("Modified number: %.2f\n", *ptr);
-    
+    double num = 23.65;
+    double *ptr = &num;
+    *ptr = 25.0;
+    printf("Modified value: %.2f\n", num);
+
     return 0;
 }
 ```
-## OUTPUT:
-![Screenshot 2025-04-27 213954](https://github.com/user-attachments/assets/8457ed4b-5eff-4952-a5b8-6f83466e8086)
 
+## OUTPUT:
+ 	
+![image](https://github.com/user-attachments/assets/69d31b81-432a-456e-8b4b-cf4da277d9d6)
 
 
 
@@ -65,28 +61,33 @@ Write a C program to calculate the Product of first 12 natural numbers using Rec
 ```
 #include <stdio.h>
 
-// Function to calculate the product of first n natural numbers
-int product(int n) {
-    if (n == 1) {
-        return 1; // Base case: the product of 1 is 1
-    } else {
-        return n * product(n - 1); // Recursive case
-    }
+int product(int n)
+{
+    if (n == 1)
+        return 1;
+    else
+        return n * product(n - 1);
 }
 
-int main() {
-    int n = 12; // We want the product of first 12 natural numbers
-    
-    // Call the recursive function and display the result
+int main()
+{
+    int n;
+    scanf("%d", &n);
+
+    if (n <= 0) {
+        printf("Input must be a natural number\n");
+        return 1;
+    }
+
     int result = product(n);
-    printf("The product of first 12 natural numbers is: %d\n", result);
-    
+    printf("Product is = %d\n", result);
     return 0;
 }
 ```
 ## OUTPUT:
-![image](https://github.com/user-attachments/assets/71ad8719-f49b-4e21-9a6e-8fccc8be28a6)
+![image](https://github.com/user-attachments/assets/2586a095-974f-4c49-b01c-bf78a0593201)
 
+         		
 ## RESULT:
 
 Thus the program has been executed successfully.
@@ -108,44 +109,35 @@ Write C Program to find Sum of each row of a Matrix
 4.	Print the sum for each row.
 
 ## PROGRAM:
+
 ```
 #include <stdio.h>
 
 int main() {
     int rows, cols;
-    
-    // Input number of rows and columns
-    printf("Enter number of rows: ");
-    scanf("%d", &rows);
-    printf("Enter number of columns: ");
-    scanf("%d", &cols);
-    
+    scanf("%d %d", &rows, &cols);
+
     int matrix[rows][cols];
-    
-    // Input matrix elements
-    printf("Enter elements of the matrix:\n");
-    for(int i = 0; i < rows; i++) {
-        for(int j = 0; j < cols; j++) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
             scanf("%d", &matrix[i][j]);
         }
     }
-    
-    // Calculate and print sum of each row
-    for(int i = 0; i < rows; i++) {
+    for (int i = 0; i < rows; i++) {
         int rowSum = 0;
-        for(int j = 0; j < cols; j++) {
+        for (int j = 0; j < cols; j++) {
             rowSum += matrix[i][j];
         }
-        printf("Sum of row %d is: %d\n", i+1, rowSum);
+        printf("The Sum of Elements of a Rows in a Matrix:  %d\n", rowSum);
     }
-    
+
     return 0;
 }
 ```
 
 ## OUTPUT
 
-![image](https://github.com/user-attachments/assets/0719dec5-7734-47dc-9c0e-bcb9582fb121)
+![image](https://github.com/user-attachments/assets/4cd464fa-8924-4071-a59d-a21373144c40)
 
  
  
@@ -174,43 +166,42 @@ Write C program for the below pyramid string pattern. Enter a string: PROGRAM En
 #include <string.h>
 
 int main() {
-    char str[] = "PROGRAM"; // The string to be used in the pyramid
-    int rows;
-
-    // Input number of rows
+    char str[100];
+    int rows, len, i, j, space;
+    printf("Enter a string: ");
+    scanf("%s", str);
     printf("Enter number of rows: ");
     scanf("%d", &rows);
 
-    int len = strlen(str); // Length of the string
-
-    // Generate the pyramid pattern
-    for (int i = 1; i <= rows; i++) {
-        // Print spaces for the pyramid alignment
-        for (int j = 1; j <= rows - i; j++) {
+    len = strlen(str);
+    for (i = 1; i <= rows; i++) {
+        for (space = 1; space <= rows - i; space++) {
             printf(" ");
         }
-        
-        // Print the characters of the string
-        for (int j = 0; j < i; j++) {
-            printf("%c ", str[j % len]);
+        for (j = 0; j < (2 * i - 1); j++) {
+            printf("%c", str[j % len]);
         }
-        
-        printf("\n"); // Move to the next line
+
+        printf("\n");
     }
-    
+
     return 0;
 }
 ```
 
-## OUTPUT
 
-![image](https://github.com/user-attachments/assets/fb1db402-f5b1-4304-8717-a7198a1e92da)
+ ## OUTPUT
+
+ ![image](https://github.com/user-attachments/assets/ddfb4360-2b68-4d44-a1ed-e947f94f185c)
 
 
 ## RESULT
 
 Thus the C program to String process executed successfully
  
+
+ 
+.
 
 
 
@@ -238,28 +229,36 @@ Step 6: End the program.
 #include <stdio.h>
 
 int main() {
-    int arr[6];      // Array to hold 6 integers
-    int *ptr = arr;  // Pointer to the first element of the array
+    int arr[10], i, n;
+    int *parr;
 
-    // Input 6 integer elements using the pointer
-    printf("Enter 6 integer elements:\n");
-    for(int i = 0; i < 6; i++) {
-        scanf("%d", ptr + i);  // Using pointer arithmetic to input elements
+    // Step 3: Set number of elements to 6
+    n = 6;
+
+    // Step 2: Initialize pointer to point to array
+    parr = arr;
+
+    // Step 4: Read elements using pointer
+    printf("Enter %d integer elements:\n", n);
+    for (i = 0; i < n; i++) {
+        scanf("%d", (parr + i));
     }
-    
-    // Display the elements using the pointer
-    printf("The elements of the array are:\n");
-    for(int i = 0; i < 6; i++) {
-        printf("%d ", *(ptr + i));  // Using pointer arithmetic to display elements
+
+    // Step 5: Display elements using pointer
+    printf("The array elements are:\n");
+    for (i = 0; i < n; i++) {
+        printf("%d ", *(parr + i));
     }
-    
+
+    printf("\n");
     return 0;
 }
 ```
+
 ## OUTPUT
+![image](https://github.com/user-attachments/assets/dd9740a2-562b-4940-a9ae-f470667f4d1f)
 
- ![image](https://github.com/user-attachments/assets/0f7095b2-146f-4cd9-9f2e-198e0ddea55b)
-
+ 
 
 ## RESULT
 
